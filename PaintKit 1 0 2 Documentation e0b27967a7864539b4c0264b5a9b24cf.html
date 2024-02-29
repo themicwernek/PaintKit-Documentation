@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PaintKit 1.0.2 Documentation </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e0b27967-a786-4539-b4c0-264b5a9b24cf" class="page sans"><header><h1 class="page-title">PaintKit 1.0.2 Documentation </h1><p class="page-description"></p></header><div class="page-body"><h2 id="7e6582f1-bb33-4d5f-b852-d8ec9fe2d8ab" class="">(Currently Incomplete)</h2><p id="9e29287d-9d49-4cd1-a890-9e729b3ae56f" class="">
+</p><p id="07790874-0e89-46fc-b221-12769328d5ad" class="">
+</p><h1 id="9da10450-5fb1-46d6-8aa3-6f8a6eb64e2e" class="">What is PaintKit?</h1><p id="b51be8fa-f289-462f-b1ad-afdaa2693e15" class="">PaintKit is a toolset for blender artists interested in easily creating stylized ‘painterly’ looks in their projects. PaintKit includes a growing variety of procedural group tools in both the shader editor and geometry nodes graph to easily create paint-like textures and effects.</p><p id="70715bd7-0b61-4e5a-8196-f14064c109ff" class="">
+</p><h1 id="a171c722-6de1-44e2-bb13-ef1a7d977649" class="">Getting Started</h1><p id="15d2fbc5-fcaa-48cd-a654-4348cbaac5d7" class="">Upon installing PaintKit for the first time, make sure to restart blender. After PaintKit has been properly installed, a new panel with be added to your N-Panel in the 3D viewport. PaintKit has two primary functions to be aware of; the Shader Groups, and the Brush Generator.</p><p id="ffd414eb-7691-44f8-9f64-2bb8ef1a165e" class="">
+</p><h2 id="e8bead9b-8f43-4ed8-b958-02aff5eb27af" class="">Brush Generator</h2><figure id="0c5d75a4-9b8d-47da-9b4c-71003a9018e6" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled.png"><img style="width:483px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled.png"/></a><figcaption>Brush Generator Panel</figcaption></figure><p id="95feea78-ebfd-44cd-b1ba-541e166077e7" class="">The PaintKit Brush Generator is a simple menu that allows you to add brushstroke cards to any object. Simply select your object and click Add Brush. Adding a Brush creates a new object parented to the original, and uses the original as input for the geometry node tools. </p><p id="74c6e86e-b979-4760-b267-046a76f4679c" class="">
+</p><h3 id="40f5850e-5f85-4b8c-92e9-043d3d5a4a5b" class="">Add Brush</h3><figure id="6012e2db-6c8e-4ab1-aa5c-cc22d1eb5e17" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%201.png"><img style="width:288px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%201.png"/></a></figure><p id="b74322d2-8ed8-4dd0-9b34-8cc460c55fd9" class="">Add Brush takes all objects selected, and distributes card geometry across the object. These cards can then be textured normally with basic UVs, or can be given a custom alpha to look like brushstrokes. The paint cards will use the same material as their parent/target object</p><p id="d88d59d1-0400-4ed4-beeb-0486e1220fb5" class="">
+</p><h3 id="9716e351-dc5c-46a2-a5cb-ce68a4cbac7e" class="">Add Guided Brush <em>BETA</em></h3><div id="558bba78-332d-4dd4-8b01-9daa124e6edc" class="column-list"><div id="ee181734-0ac3-4dce-b4a4-1308fbd28ebe" style="width:50%" class="column"><figure id="82718f3d-2c57-4a58-aa43-3ca93b130851" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%202.png"><img style="width:288px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%202.png"/></a></figure></div><div id="e11cbac6-f23c-4940-9ad6-ec692f29709b" style="width:50%" class="column"><figure id="2633283d-db09-4655-b4e9-3c4fd0c4f22e" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%203.png"><img style="width:336px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%203.png"/></a></figure></div></div><p id="496e2d59-c686-4678-a700-8299a4bf77d2" class="">Add Guided Brush allows for the creation of brushstrokes with directions influence by guide curves, which can be selected in the N-Panel controls. Brushstrokes sample the guide closest to them and extrude the strokes according to the nearest curve tangent. Best used in combination with the Shrinkwrap Toggle</p><p id="c2049176-5369-4315-a421-afc326e0ccad" class="">
+</p><h3 id="0daf37d5-fa46-44b0-bf32-e0e8c4ca8039" class="">Add SimpleShell</h3><figure id="e5ecb10f-2692-43bf-853a-e0598b4f3463" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%204.png"><img style="width:432px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%204.png"/></a></figure><p id="2f65bbdd-afbd-4a83-9fc4-02400406094e" class="">Add SimpleShell creates a shell of the original object using an inverse-hull method. Ideal if you are looking to increase performance as it is much less resource intensive. Using the SimpleShell nodegroup, you have access to masking and material options for the shell.</p><p id="bdae6a3c-347e-43e0-b791-a0f7ea1af725" class="">
+</p><h3 id="50eddb4e-7556-46bf-be75-e56762f6db12" class="">Remove Brushstrokes</h3><p id="859b4df0-1ffe-4622-a7f9-738ab5c3c6af" class="">Remove brushstrokes removes all brushes and shells from the selected objects</p><p id="907a81e1-9f36-42ca-a179-4d8cbd3ebdb7" class="">
+</p><h3 id="05efa451-603d-41f6-8002-01959fa1eeca" class="">Shrinkwrap Toggle</h3><figure id="810b88cd-e8e9-4bad-86cb-f7c9c3ab1ea1" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%205.png"><img style="width:432px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%205.png"/></a></figure><p id="661284e2-dfcc-404e-82cb-d554fd1ce5da" class="">Adds a shrinkwrap modifier to the brush. The modifier is placed after the brush generation but before the brush noise settings. Offset can be controlled by the Expand option in the Panel</p><p id="6275e79a-50e6-4b24-a8cf-f5f74cf31982" class="">
+</p><h3 id="9966ce2e-a0f8-4f07-82b9-3f0406db7e96" class="">Hide</h3><p id="a719e390-3f53-4fab-a3a9-add136165570" class="">hides the brushes on the selected object</p><p id="a9b00069-e854-4a64-a398-3dc98a11495c" class="">
+</p><h3 id="acec66e4-e10e-4ea8-9455-38c8833b51ab" class="">Hide all</h3><p id="4544d510-e703-412d-8962-774d24d69193" class="">hides all brush objects in the scene</p><p id="a09ae7d2-8fb9-47f2-babe-cf26afcc973b" class="">
+</p><h2 id="50203426-03ab-46df-b537-39a4898cc8e9" class="">Shader Groups</h2><h3 id="184a5627-fd8c-408f-8cbd-99dd85d7397a" class="">SketchToon</h3><div id="d9cf8f49-bd37-4895-b432-fb0063b5ec9f" class="column-list"><div id="a7507761-39f7-4fe0-9ea5-2e96b2bff954" style="width:50%" class="column"><figure id="0c5ef3be-76b2-4f59-abc3-114426db08a5" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%206.png"><img style="width:702px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%206.png"/></a></figure></div><div id="65294905-495b-4b9f-8074-7343a7556559" style="width:50.000000000000014%" class="column"><figure id="db869b72-18aa-48b8-9a9d-9b7370a874b9" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%207.png"><img style="width:406px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%207.png"/></a></figure></div></div><p id="055f3ca0-1e5a-42ca-b479-16ce37b12456" class="">Eevee-only shader group made to mimic sketchy-pencil and paint like effects. </p><p id="b484c7b6-61b4-4a9e-882d-3ffe76c3cafb" class="">
+</p><h3 id="a5e5a233-1308-4dfc-8df4-ae0db6dbca0f" class="">CToon Diffuse</h3><div id="0c97bd3b-2616-4410-b5c5-cd38d451d8ec" class="column-list"><div id="e22d1535-5a62-4c14-8dac-67934c21e1d8" style="width:50%" class="column"><figure id="8405d5d5-8c4d-4532-acb0-a4a422a1183c" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%208.png"><img style="width:432px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%208.png"/></a></figure></div><div id="f6b66977-1e91-4709-ab3d-915d07ffc7b4" style="width:50%" class="column"><figure id="86375109-39cf-47e2-aa91-033713639c67" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%209.png"><img style="width:331px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%209.png"/></a></figure></div></div><p id="ec39779f-1703-40b1-b108-9fe9b9904a7e" class="">Diffuse shader built with the default Toon BSDF, with additional controls and shading levels</p><p id="caaaa4da-2c07-49f1-a027-682f51888be4" class="">
+</p><h3 id="00f7f950-828a-4365-a2c9-5d74cb6b6eb2" class="">CToon Glossy</h3><div id="9499cf55-efe0-478c-8392-497be23d92f5" class="column-list"><div id="1b5bf47d-b4c2-4cbb-af01-9a163fd934f7" style="width:50%" class="column"><figure id="8d6aaa41-ac6f-4cdf-a057-6acb11938c5b" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2010.png"><img style="width:503px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2010.png"/></a></figure></div><div id="5cc6e1b2-b1e5-4c3e-bc31-f19e919cc653" style="width:50%" class="column"><figure id="cd5abfdc-3db7-4d21-b492-5f7c4ba7acc1" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2011.png"><img style="width:288px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2011.png"/></a></figure></div></div><p id="0c87a780-3587-4527-a9f6-ae26f7bc8346" class="">Glossy Variant of CToon Diffuse. Allows for a shinier look and includes controls for metalness. Metalness control roughly approximates tinted reflections by increasing the saturation of the two upper shading levels.</p><p id="4b96c7e9-6bf0-4fc0-8589-8dcf09259427" class="">
+</p><h3 id="17f4bd46-383a-4585-80b1-080832c00542" class="">Normal Painter</h3><figure id="36f4d59e-5ef6-47ea-b0c0-e9c0d5cfd8c7" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2012.png"><img style="width:576px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2012.png"/></a></figure><div id="e09f6a1f-46c5-43ab-889b-c8af3f9a41e1" class="column-list"><div id="8d82112a-a259-4dd2-a6fb-32a122ece5b1" style="width:50%" class="column"><figure id="9abf3ece-7e2a-4e58-9ad8-46eecbbb2e10" class="image" style="text-align:left"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2013.png"><img style="width:288px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2013.png"/></a></figure></div><div id="ebf5c0af-5fb0-4a57-9872-b9def0786850" style="width:50%" class="column"><figure id="e455894f-f660-4419-b6f8-120e281df15c" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2014.png"><img style="width:192px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2014.png"/></a></figure><p id="3a782d78-5020-4758-9d64-e604d6576c88" class="">
+</p><p id="5bd92ffc-7938-49ac-b6f1-bc2155561675" class="">
+</p></div></div><p id="bfbbea35-ad4d-43ce-b7fc-16ff52e3816a" class="">Uses a voronoi texture to divide the object normals into discrete sections, creating a more stylized look without having to manually paint different shading areas. </p><ul id="5a2c4920-3e79-4f3b-9312-31df35e87acc" class="bulleted-list"><li style="list-style-type:disc">Paint size<ul id="c21c85a1-08b7-44f6-9bec-d809789b7fba" class="bulleted-list"><li style="list-style-type:circle">controls the size of the normal ‘sections’ </li></ul></li></ul><ul id="deb1d4fe-6618-4e5b-88ed-9c42d23d4062" class="bulleted-list"><li style="list-style-type:disc">Paint Smooth<ul id="26cacf26-c19a-4ad4-9c0b-8d21e1cefab0" class="bulleted-list"><li style="list-style-type:circle">smooths the boundaries between each section</li></ul></li></ul><ul id="86d39de1-1569-4f4d-94a0-ba28972665e8" class="bulleted-list"><li style="list-style-type:disc">Paint Roughen<ul id="609e3c8b-957e-40a0-a98f-71f0cdad5778" class="bulleted-list"><li style="list-style-type:circle">uses a Noise Texture to displace the edges of the sections to roughen up the faceted look of the sections edges</li></ul></li></ul><ul id="a54219f9-3630-4f99-95d1-d84867f3ad2f" class="bulleted-list"><li style="list-style-type:disc">Roughen Scale<ul id="c8ddc1b3-0dd5-41f2-9a78-2be252906ce6" class="bulleted-list"><li style="list-style-type:circle">adjusts the scale of the Noise Texture that displaces the section edges</li></ul></li></ul><ul id="005dadbe-0e48-4e15-b4f4-f05b21befde8" class="bulleted-list"><li style="list-style-type:disc">Custom Texture<ul id="0db3d00f-dffb-47a4-a57d-7b78ca6a0f7e" class="bulleted-list"><li style="list-style-type:circle">Allows for the input of any texture to drive the displacement of the normal sections</li></ul></li></ul><ul id="d3386e7a-9d71-46b4-9363-2708321e8616" class="bulleted-list"><li style="list-style-type:disc">Custom Offset<ul id="983b0104-c266-49f9-baf2-65eca8665c1a" class="bulleted-list"><li style="list-style-type:circle">Strength of the displacement from the custom texture</li></ul></li></ul><ul id="e74b06d0-d2db-42be-ba44-8c084e6043c6" class="bulleted-list"><li style="list-style-type:disc">Bump Height, Bump Strength, Bump Distance, Normal Map<ul id="7a93c477-4210-46a0-9ff0-003a74cf7eb0" class="bulleted-list"><li style="list-style-type:circle">These controls are the typical controls used in blender’s Bump map and Normal map node</li></ul></li></ul><ul id="8581ff79-aae4-49eb-a961-0e2551538092" class="bulleted-list"><li style="list-style-type:disc">Use Custom Normal<ul id="bd468d32-42b0-485b-8b6f-349d0bf5dc45" class="bulleted-list"><li style="list-style-type:circle">switch to control whether the group uses the custom normal input or the default for object shading</li></ul></li></ul><ul id="ae2b8f6e-e9b7-486d-b449-e02443de204a" class="bulleted-list"><li style="list-style-type:disc">Custom Normal<ul id="7da199a4-0eed-4fbc-883a-670d5b21fee9" class="bulleted-list"><li style="list-style-type:circle">Inputs custom normals to the group as an override for the default normals. Requires input normals to be in world space to operate properly.</li></ul></li></ul><p id="a167980e-695c-4e34-8229-f2cc166dbcb0" class="">
+</p><h3 id="fab10d5d-f5ff-4370-8cbe-627dff80e0b2" class="">NP Controller</h3><div id="91cfeb70-9d50-4616-9596-a6bf9e3b1293" class="column-list"><div id="f605e512-9f55-4218-bbc7-51133afa5c08" style="width:75%" class="column"><figure id="4e8e08e0-59f4-4ed6-aa0b-a3ba705340f5" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2015.png"><img style="width:384px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2015.png"/></a></figure></div><div id="44d349c1-d376-4764-aaf5-06c2635e8b7d" style="width:25%" class="column"><figure id="84ea7fa7-31e7-4cc8-b2c5-1377cf6fa7dd" class="image"><a href="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2016.png"><img style="width:225px" src="PaintKit%201%200%202%20Documentation%20e0b27967a7864539b4c0264b5a9b24cf/Untitled%2016.png"/></a></figure></div></div><p id="11af2fb4-5d5e-47fb-9ebe-010b8f7d31f7" class="">Allows for control over Normal Painter to be handled by a simple nodegroup, which can then be copied and instanced into any other material. This helps with having one global controller for all materials using the Normal Painter node</p><p id="8d8599ba-4917-44ec-9aaf-0a04cf84d9d2" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
